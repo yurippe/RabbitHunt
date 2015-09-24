@@ -14,11 +14,16 @@ public class Planner
     private ArrayList<Direction> plan;
     
     private boolean inDanger = false;
+    
+    private int movesOfTypeNone = 0;
+    private boolean escaping = false;
+    private Direction escapingFrom = Direction.STAY;
+    private int timesClearOfFox = 0;
     /**
      * Constructor for objects of class Planner
      */
     
-    private enum moveType{
+    public enum moveType{
         CARROT, WAIT_FOX, ESCAPE_FOX, EAT_FOX, NONE;
     }
     public Planner(Rabbit rabbit)
@@ -70,7 +75,7 @@ public class Planner
                     if(plannedDirection == Direction.STAY){
                         plannedDirection = d;
                     }
-                    if(rabbit.distance(plannedDirection) < dist){
+                    if(rabbit.distance(plannedDirection) < dist && movesOfTypeNone < 4){
                         plannedDirection = d;
                     }
                 }
@@ -194,11 +199,39 @@ public class Planner
             
         }
     }
+    
+    if(typeOfMove == moveType.NONE){
+        movesOfTypeNone++;
+    }else{
+        movesOfTypeNone = 0;
+    }
+    
     if(typeOfMove == moveType.WAIT_FOX){
         plannedDirection = Direction.STAY; //Moved down here so we can keep track of which fox we are waiting for
     }
+    
+    if(typeOfMove == moveType.CARROT){
+        if(timesClearOfFox > 3){
+            escaping = false;
+        }
+        if(escaping){
+            typeOfMove = moveType.ESCAPE_FOX;
+            Direction dEscape = findClosestFox();
+            if(dEscape == Direction.STAY){
+                timesClearOfFox++;
+                dEscape = escapingFrom;
+            }else{
+                timesClearOfFox = (timesClearOfFox <= 0) ? 0:timesClearOfFox - 1;
+            }
+            
+            plannedDirection = dEscape;
+        }
+    }
     if(typeOfMove == moveType.ESCAPE_FOX){
         //Escape
+        escaping = true;
+        escapingFrom = plannedDirection;
+        
         Direction left, right;
         int outcomeType = 0; //1 = L/R ; 2 = LD/RD
         if(rabbit.distance(plannedDirection) <= 3){
@@ -233,11 +266,14 @@ public class Planner
             leftright2.add(right);
         
             plannedDirection = getLongestFreeDirection(leftright2);
+            
         }
+    }else{
+        escaping = false;
     }
         tmp.add(plannedDirection);
         
-        //System.out.println(typeOfMove);
+        System.out.println(typeOfMove);
         plan = tmp;
     }
 
@@ -248,10 +284,11 @@ public class Planner
     }
     
     public Direction getDirection(){
-
+        System.out.println(plan);
+        //This works similary to an iterator
         Direction d = plan.get(0);
         plan.remove(0);
-
+        
         return d;
     }
     
@@ -274,6 +311,24 @@ public class Planner
         
         return bestDir;
         
+    }
+    
+    private Direction findClosestFox(){
+        Direction dir = Direction.STAY;
+        int smallestDistance = 0;
+        for(Direction d : Direction.allDirections()){
+            if(rabbit.look(d) == Fox.class){
+                if(dir == Direction.STAY){
+                    dir = d;
+                    smallestDistance = 0;
+                }
+                if(smallestDistance > rabbit.distance(d)){
+                    dir = d;
+                    smallestDistance = rabbit.distance(d);
+                }
+            }
+        }
+        return dir;
     }
     
 }
