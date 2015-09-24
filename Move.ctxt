@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.params=dir\ mtype
-comment0.target=Move(Direction,\ Planner.moveType)
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Move\r\n
-comment1.params=
-comment1.target=Direction\ getDirection()
-comment2.params=
-comment2.target=Planner.moveType\ getMoveType()
-numComments=3
