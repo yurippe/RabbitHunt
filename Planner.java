@@ -57,7 +57,7 @@ public class Planner
         moveType typeOfMove = moveType.NONE;
         
         Direction plannedDirection = Direction.STAY;
-        boolean finished = false;
+
         ArrayList<Direction> tmp = new ArrayList<Direction>();
         
 
@@ -118,7 +118,7 @@ public class Planner
                }else{
                    if(dist == 2){
                          typeOfMove = moveType.WAIT_FOX;
-                         plannedDirection = Direction.STAY;
+                         plannedDirection = d;
                         }
                    else{
                             typeOfMove = moveType.EAT_FOX;
@@ -156,11 +156,31 @@ public class Planner
             if(cls == Fox.class){
                 if(dist < rabbit.distance(plannedDirection)){
                     plannedDirection = d;
+                    
+                   if(rabbit.distance(d) == 2){ 
+                    //If the direction changes, MAYBE we should wait, check:
+                    typeOfMove = moveType.WAIT_FOX;
+                   }
                 }
+                
+
             }
         }
+        
+        else if(typeOfMove == moveType.WAIT_FOX){
+            
+            if(cls == Fox.class){
+                if(dist == 1){
+                    plannedDirection = d;
+                    typeOfMove = moveType.EAT_FOX;
+                }
+            }
+            
+        }
     }
-    
+    if(typeOfMove == moveType.WAIT_FOX){
+        plannedDirection = Direction.STAY; //Moved down here so we can keep track of which fox we are waiting for
+    }
     if(typeOfMove == moveType.ESCAPE_FOX){
         //Escape
         Direction left, right;
@@ -198,22 +218,10 @@ public class Planner
         
             plannedDirection = getLongestFreeDirection(leftright2);
         }
-        /*
-        plannedDirection = invertedDirections.get(plannedDirection);
-        if(!(rabbit.canMove(plannedDirection))){
-           plannedDirection = Direction.turn(plannedDirection, 2);
-           if(!(rabbit.canMove(plannedDirection))){
-               plannedDirection = Direction.turn(plannedDirection, 4);
-            } //else die
-        }
-        */
-       if(rabbit.distance(plannedDirection) >= 2){
-        // tmp.add(plannedDirection);
-        }
     }
         tmp.add(plannedDirection);
         
-        
+        System.out.println(typeOfMove);
         plan = tmp;
     }
 
