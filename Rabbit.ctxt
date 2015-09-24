@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=model\ position
+comment0.target=Rabbit(Model,\ Position)
+comment1.params=
+comment1.target=Direction\ decideDirection()
+comment1.text=\r\n\ Decides\ in\ which\ direction\ the\ rabbit\ wants\ to\ move.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getCreator()
+comment2.text=\r\n\ This\ method\ is\ used\ to\ retrieve\ who\ the\ authors\ are.\r\n
+numComments=3

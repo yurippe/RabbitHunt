@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.params=model\ position
+comment0.target=Animal(Model,\ Position)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Animal.\r\n\r\n\ @param\ model\ \ \ \ \ the\ model\ needed\ to\ use\ Model.look\ and\ Model.distance\ methods\r\n\ @param\ position\ \ the\ position\ on\ the\ field\ in\ which\ to\ place\ this\ animal\r\n
+comment1.params=position
+comment1.target=void\ setPosition(Position)
+comment2.params=
+comment2.target=Position\ getPosition()
+comment3.params=
+comment3.target=Direction\ randomDirection()
+comment3.text=\r\n\ Return\ a\ random\ direction.\r\n
+comment4.params=d
+comment4.target=java.lang.Class\ look(Direction)
+comment4.text=\r\n\ Finds\ the\ distance\ to\ the\ first\ visible\ thing\ in\ the\ given\r\n\ direction,\ starting\ from\ this\ animal's\ current\ position.\r\n\r\n\ @param\ direction\ the\ direction\ in\ which\ to\ look\r\n\ @return\ the\ type\ of\ the\ object\ seen\r\n
+comment5.params=direction
+comment5.target=int\ distance(Direction)
+comment5.text=\r\n\ Finds\ the\ distance\ to\ the\ first\ visible\ thing\ in\ the\ given\r\n\ direction,\ starting\ from\ this\ animal's\ current\ position.\r\n\ If\ nothing\ is\ found\ before\ the\ edge\ -1\ is\ returned.\r\n\r\n\ @param\ direction\ the\ direction\ in\ which\ to\ look\r\n\ @return\ the\ distance\ to\ the\ object\ seen\ in\ number\ of\ steps\r\n
+comment6.params=direction
+comment6.target=boolean\ canMove(Direction)
+comment7.params=
+comment7.target=boolean\ isBeserk()
+comment8.params=
+comment8.target=Direction\ decideDirection()
+comment8.text=\r\n\ Decides\ what\ direction\ to\ move\ next.\r\n\r\n\ @return\ the\ desired\ direction\r\n
+numComments=9

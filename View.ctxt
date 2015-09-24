@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=model
+comment0.target=View(Model)
+comment1.params=
+comment1.target=int\ getIconHeight()
+comment2.params=
+comment2.target=int\ getIconWidth()
+comment3.params=c\ g\ x\ y
+comment3.target=void\ paintIcon(java.awt.Component,\ java.awt.Graphics,\ int,\ int)
+comment4.params=g\ x\ y\ i\ j
+comment4.target=void\ drawWhiteSquare(java.awt.Graphics,\ int,\ int,\ int,\ int)
+comment5.params=row
+comment5.target=int\ cellTop(int)
+comment6.params=column
+comment6.target=int\ cellLeft(int)
+numComments=7

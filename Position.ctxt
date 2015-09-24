@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=column\ row
+comment0.target=Position(int,\ int)
+comment1.params=
+comment1.target=int\ getColumn()
+comment2.params=
+comment2.target=int\ getRow()
+comment3.params=o
+comment3.target=boolean\ equals(java.lang.Object)
+comment4.params=
+comment4.target=int\ hashCode()
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=m
+comment6.target=boolean\ validFieldPosition(Model)
+comment7.params=d
+comment7.target=Position\ getAdjacent(Direction)
+comment8.params=center\ m\ includeCenter
+comment8.target=java.lang.Iterable\ getNeighbourhood(Position,\ Model,\ boolean)
+comment9.params=a\ b
+comment9.target=double\ getDistance(Position,\ Position)
+numComments=10

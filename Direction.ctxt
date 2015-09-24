@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=d
+comment0.target=int\ columnChange(Direction)
+comment1.params=d
+comment1.target=int\ rowChange(Direction)
+comment2.params=
+comment2.target=java.util.List\ getAllDirections()
+comment3.params=
+comment3.target=java.lang.Iterable\ allDirections()
+comment4.params=d\ number
+comment4.target=Direction\ turn(Direction,\ int)
+numComments=5

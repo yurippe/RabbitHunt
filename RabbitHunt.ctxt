@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=RabbitHunt()
+comment1.params=
+comment1.target=void\ populate()
+comment2.params=noOfRabbits\ noOfFoxes\ noOfBushes
+comment2.target=void\ populate(int,\ int,\ int)
+comment3.params=
+comment3.target=void\ populateWithCarrots()
+comment4.params=noOfRabbits\ noOfFoxes\ noOfBushes\ noOfCarrots
+comment4.target=void\ populateWithCarrots(int,\ int,\ int,\ int)
+numComments=5

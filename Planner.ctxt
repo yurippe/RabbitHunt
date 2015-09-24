@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=rabbit
+comment0.target=Planner(Rabbit)
+comment1.params=
+comment1.target=void\ makePlan()
+comment2.params=
+comment2.target=boolean\ hasPlan()
+comment3.params=
+comment3.target=Direction\ getDirection()
+comment4.params=
+comment4.target=boolean\ isInDanger()
+comment5.params=directions
+comment5.target=Direction\ getLongestFreeDirection(java.util.ArrayList)
+numComments=6
