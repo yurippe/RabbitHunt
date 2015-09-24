@@ -108,7 +108,7 @@ public class Planner
             
             if(cls == Fox.class){
                 if(!(rabbit.isBeserk())){
-                if(dist >= 3 && rabbit.distance(plannedDirection) > 1){
+                if(dist >= 3){
                     
                 }else if (dist <=1){
                     //DANGER DANGER
@@ -137,7 +137,7 @@ public class Planner
         
         else if(typeOfMove == moveType.ESCAPE_FOX){
             if(cls == Carrot.class){
-                if(dist < rabbit.distance(plannedDirection) && rabbit.distance(plannedDirection) > 2){
+                if(dist < rabbit.distance(plannedDirection) && rabbit.distance(plannedDirection) > 1){
                     typeOfMove = moveType.CARROT;
                     plannedDirection = d;
                 }
@@ -165,6 +165,22 @@ public class Planner
                 
 
             }
+           
+            //just to be sure, how about we count the number of foxes of distance 1 to us:
+            int foxCount = 0;
+            for(Direction dc : Direction.allDirections()){
+                if(rabbit.look(dc) == Fox.class){
+                  if(rabbit.distance(dc) == 1){
+                      foxCount ++;
+                }
+            }
+            }
+            if(foxCount > 1){
+                //abort mission
+                typeOfMove = moveType.ESCAPE_FOX;
+                //no need to change plannedDirection, as it is already set to the fox we originally wanted to eat
+            }
+            
         }
         
         else if(typeOfMove == moveType.WAIT_FOX){
@@ -221,7 +237,7 @@ public class Planner
     }
         tmp.add(plannedDirection);
         
-        System.out.println(typeOfMove);
+        //System.out.println(typeOfMove);
         plan = tmp;
     }
 
