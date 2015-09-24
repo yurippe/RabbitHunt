@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Benchmark
 {
-    public static final int NUMBER_OF_TRIALS = 100;
+    public static final int NUMBER_OF_TRIALS = 100000;
     public static final int NUMBER_OF_COLUMNS = 20;
     public static final int NUMBER_OF_ROWS = 20;
 
@@ -82,7 +82,7 @@ public class Benchmark
         }
         
         String reply = post("https://users-cs.au.dk/dintprog/e15/rabbithunt.php", data);
-        System.out.println("\nThe rabbit won " + (100-lossCount) + " time(s)" + reply);
+        System.out.println("\nThe rabbit won " + (NUMBER_OF_TRIALS-lossCount) + " time(s)" + reply);
     }
 
     private static String readFile() {

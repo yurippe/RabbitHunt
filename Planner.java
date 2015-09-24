@@ -9,7 +9,6 @@ public class Planner
 {
     private Rabbit rabbit;
     private HashMap<Direction, Direction> invertedDirections;
-    private HashMap<Direction, List<Direction>> closestDirections;
     
     private ArrayList<Direction> plan;
     
@@ -39,16 +38,6 @@ public class Planner
         invertedDirections.put(Direction.SW, Direction.NE);
         invertedDirections.put(Direction.NW, Direction.SE);
         invertedDirections.put(Direction.SE, Direction.NW);
-        
-        closestDirections = new HashMap<Direction, List<Direction>>();
-        closestDirections.put(Direction.N, Arrays.asList(Direction.NE, Direction.NW));
-        closestDirections.put(Direction.S, Arrays.asList(Direction.SE, Direction.SW));
-        closestDirections.put(Direction.W, Arrays.asList(Direction.SW, Direction.NW));
-        closestDirections.put(Direction.E, Arrays.asList(Direction.NE, Direction.SE));
-        closestDirections.put(Direction.NE, Arrays.asList(Direction.N, Direction.E));
-        closestDirections.put(Direction.SW, Arrays.asList(Direction.S, Direction.W));
-        closestDirections.put(Direction.NW, Arrays.asList(Direction.N, Direction.W));
-        closestDirections.put(Direction.SE, Arrays.asList(Direction.S, Direction.E));
         
         plan = new ArrayList<Direction>();
     }
@@ -273,7 +262,7 @@ public class Planner
     }
         tmp.add(plannedDirection);
         
-        System.out.println(typeOfMove);
+        //System.out.println(typeOfMove);
         plan = tmp;
     }
 
@@ -284,7 +273,7 @@ public class Planner
     }
     
     public Direction getDirection(){
-        System.out.println(plan);
+        //System.out.println(plan);
         //This works similary to an iterator
         Direction d = plan.get(0);
         plan.remove(0);
