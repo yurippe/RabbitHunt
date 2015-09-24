@@ -150,23 +150,17 @@ public class Planner
             }
 
         }
-    }
-    
-    if(typeOfMove == moveType.EAT_FOX){
-        //check if the 2 foxes are right next to eachother
-        if(rabbit.distance(plannedDirection) == 1){
-            for(Direction d : Direction.allDirections()){
-                if(!(d == plannedDirection)){
-                    if(rabbit.look(d) == Fox.class){
-                        if(rabbit.distance(d) <= 2){
-                            //abort
-                            typeOfMove = moveType.ESCAPE_FOX;
-                        }
-                    }
+        
+        else if(typeOfMove == moveType.EAT_FOX){
+                    
+            if(cls == Fox.class){
+                if(dist < rabbit.distance(plannedDirection)){
+                    plannedDirection = d;
                 }
             }
         }
     }
+    
     if(typeOfMove == moveType.ESCAPE_FOX){
         //Escape
         Direction left, right;
