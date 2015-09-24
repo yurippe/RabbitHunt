@@ -9,20 +9,16 @@ public class Planner
 {
     private Rabbit rabbit;
     private HashMap<Direction, Direction> invertedDirections;
+    private HashMap<Direction, List<Direction>> closestDirections;
     
     private ArrayList<Direction> plan;
     
     private boolean inDanger = false;
-    
-    private int movesOfTypeNone = 0;
-    private boolean escaping = false;
-    private Direction escapingFrom = Direction.STAY;
-    private int timesClearOfFox = 0;
     /**
      * Constructor for objects of class Planner
      */
     
-    public enum moveType{
+    private enum moveType{
         CARROT, WAIT_FOX, ESCAPE_FOX, EAT_FOX, NONE;
     }
     public Planner(Rabbit rabbit)
@@ -38,6 +34,16 @@ public class Planner
         invertedDirections.put(Direction.SW, Direction.NE);
         invertedDirections.put(Direction.NW, Direction.SE);
         invertedDirections.put(Direction.SE, Direction.NW);
+        
+        closestDirections = new HashMap<Direction, List<Direction>>();
+        closestDirections.put(Direction.N, Arrays.asList(Direction.NE, Direction.NW));
+        closestDirections.put(Direction.S, Arrays.asList(Direction.SE, Direction.SW));
+        closestDirections.put(Direction.W, Arrays.asList(Direction.SW, Direction.NW));
+        closestDirections.put(Direction.E, Arrays.asList(Direction.NE, Direction.SE));
+        closestDirections.put(Direction.NE, Arrays.asList(Direction.N, Direction.E));
+        closestDirections.put(Direction.SW, Arrays.asList(Direction.S, Direction.W));
+        closestDirections.put(Direction.NW, Arrays.asList(Direction.N, Direction.W));
+        closestDirections.put(Direction.SE, Arrays.asList(Direction.S, Direction.E));
         
         plan = new ArrayList<Direction>();
     }
@@ -64,7 +70,7 @@ public class Planner
                     if(plannedDirection == Direction.STAY){
                         plannedDirection = d;
                     }
-                    if(rabbit.distance(plannedDirection) < dist && movesOfTypeNone < 4){
+                    if(rabbit.distance(plannedDirection) < dist){
                         plannedDirection = d;
                     }
                 }
@@ -102,7 +108,7 @@ public class Planner
             
             if(cls == Fox.class){
                 if(!(rabbit.isBeserk())){
-                if(dist >= 3){
+                if(dist >= 3 && rabbit.distance(plannedDirection) > 1){
                     
                 }else if (dist <=1){
                     //DANGER DANGER
@@ -131,7 +137,7 @@ public class Planner
         
         else if(typeOfMove == moveType.ESCAPE_FOX){
             if(cls == Carrot.class){
-                if(dist < rabbit.distance(plannedDirection) && rabbit.distance(plannedDirection) > 1){
+                if(dist < rabbit.distance(plannedDirection) && rabbit.distance(plannedDirection) > 2){
                     typeOfMove = moveType.CARROT;
                     plannedDirection = d;
                 }
@@ -159,22 +165,6 @@ public class Planner
                 
 
             }
-           
-            //just to be sure, how about we count the number of foxes of distance 1 to us:
-            int foxCount = 0;
-            for(Direction dc : Direction.allDirections()){
-                if(rabbit.look(dc) == Fox.class){
-                  if(rabbit.distance(dc) == 1){
-                      foxCount ++;
-                }
-            }
-            }
-            if(foxCount > 1){
-                //abort mission
-                typeOfMove = moveType.ESCAPE_FOX;
-                //no need to change plannedDirection, as it is already set to the fox we originally wanted to eat
-            }
-            
         }
         
         else if(typeOfMove == moveType.WAIT_FOX){
@@ -188,39 +178,11 @@ public class Planner
             
         }
     }
-    
-    if(typeOfMove == moveType.NONE){
-        movesOfTypeNone++;
-    }else{
-        movesOfTypeNone = 0;
-    }
-    
     if(typeOfMove == moveType.WAIT_FOX){
         plannedDirection = Direction.STAY; //Moved down here so we can keep track of which fox we are waiting for
     }
-    
-    if(typeOfMove == moveType.CARROT){
-        if(timesClearOfFox > 3){
-            escaping = false;
-        }
-        if(escaping){
-            typeOfMove = moveType.ESCAPE_FOX;
-            Direction dEscape = findClosestFox();
-            if(dEscape == Direction.STAY){
-                timesClearOfFox++;
-                dEscape = escapingFrom;
-            }else{
-                timesClearOfFox = (timesClearOfFox <= 0) ? 0:timesClearOfFox - 1;
-            }
-            
-            plannedDirection = dEscape;
-        }
-    }
     if(typeOfMove == moveType.ESCAPE_FOX){
         //Escape
-        escaping = true;
-        escapingFrom = plannedDirection;
-        
         Direction left, right;
         int outcomeType = 0; //1 = L/R ; 2 = LD/RD
         if(rabbit.distance(plannedDirection) <= 3){
@@ -255,10 +217,7 @@ public class Planner
             leftright2.add(right);
         
             plannedDirection = getLongestFreeDirection(leftright2);
-            
         }
-    }else{
-        escaping = false;
     }
         tmp.add(plannedDirection);
         
@@ -273,11 +232,10 @@ public class Planner
     }
     
     public Direction getDirection(){
-        //System.out.println(plan);
-        //This works similary to an iterator
+
         Direction d = plan.get(0);
         plan.remove(0);
-        
+
         return d;
     }
     
@@ -300,24 +258,6 @@ public class Planner
         
         return bestDir;
         
-    }
-    
-    private Direction findClosestFox(){
-        Direction dir = Direction.STAY;
-        int smallestDistance = 0;
-        for(Direction d : Direction.allDirections()){
-            if(rabbit.look(d) == Fox.class){
-                if(dir == Direction.STAY){
-                    dir = d;
-                    smallestDistance = 0;
-                }
-                if(smallestDistance > rabbit.distance(d)){
-                    dir = d;
-                    smallestDistance = rabbit.distance(d);
-                }
-            }
-        }
-        return dir;
     }
     
 }

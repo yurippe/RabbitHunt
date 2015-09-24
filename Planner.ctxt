@@ -11,6 +11,4 @@ comment4.params=
 comment4.target=boolean\ isInDanger()
 comment5.params=directions
 comment5.target=Direction\ getLongestFreeDirection(java.util.ArrayList)
-comment6.params=
-comment6.target=Direction\ findClosestFox()
-numComments=7
+numComments=6
