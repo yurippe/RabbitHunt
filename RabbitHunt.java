@@ -32,6 +32,10 @@ public class RabbitHunt
         populateWithCarrots(1, 1, 20, 5);
     }
     
+    public synchronized static void populateBenchmark(){
+        populateWithCarrots(1, 2, 20, 5);
+    }
+    
     public synchronized static void populateWithCarrots(int noOfRabbits, int noOfFoxes, int noOfBushes, int noOfCarrots) {
         if(system == null) {
             system = new RabbitHunt();
