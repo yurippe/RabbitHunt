@@ -6,13 +6,15 @@
  * @version September 8, 2015
  */
 public class Rabbit extends Animal {
+
+    private Planner planner;
+    
     /**
      * In order to create a new Rabbit we need to provide a
      * model og and position. Do not change the signature or
      * first line of the construction. Appending code after
      * the first line is allowed.
      */
-    private Planner planner;
     public Rabbit(Model model, Position position) {
         super(model, position);
         planner = new Planner(this);
@@ -22,12 +24,17 @@ public class Rabbit extends Animal {
      * Decides in which direction the rabbit wants to move.
      */
     @Override
-    public Direction decideDirection1(){
+    public Direction decideDirection(){
     
         
-        
+        return Direction.STAY;
     }
         
+    /** 
+     * Waits for the fox, then runs in circles
+     * NOT effective versus more than one fox
+     * 
+     */
         public Direction decideDirection2(){
             Class<?> c;
             
@@ -51,6 +58,10 @@ public class Rabbit extends Animal {
         return Direction.STAY;
        }
     
+    /** 
+    * Uses the planner to get a direction
+    * 
+    */
     public Direction decideDirectionR() {
         //If hasPlan && not inDanger:
         //followPlan()

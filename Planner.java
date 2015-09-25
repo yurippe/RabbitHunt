@@ -21,7 +21,8 @@ public class Planner
         CARROT, WAIT_FOX, ESCAPE_FOX, EAT_FOX, NONE;
     }
     
-    /** Constructor for Planner
+    /** 
+     * Constructor for Planner
      * 
      */
     public Planner(Rabbit rabbit)
@@ -31,7 +32,8 @@ public class Planner
        plan = new ArrayList<Direction>();
     }
 
-    /** Makes a plan of future moves
+    /**
+     * Makes a plan of future moves
      * 
      */
     public void makePlan()
@@ -251,7 +253,8 @@ public class Planner
     }
 
 
-    /** Returns whether or not we have a plan we can follow.
+    /** 
+     * Returns whether or not we have a plan we can follow.
      * 
      * 
      */
@@ -259,9 +262,10 @@ public class Planner
        return (plan.size() > 0);
     }
     
-    /** Get's the next direction to take.
-     *  NOTE: This works much like an iterator, and will also remove the direction from the plan arraylist
-     *  (Consider renaming to getNextDirection())
+    /** 
+     * Get's the next direction to take.
+     * NOTE: This works much like an iterator, and will also remove the direction from the plan arraylist
+     * (Consider renaming to getNextDirection())
      */
     public Direction getDirection(){
 
@@ -271,7 +275,8 @@ public class Planner
         return d;
     }
     
-    /** Returns whether the rabbit is in danger.
+    /** 
+     *  Returns whether the rabbit is in danger.
      *  If the rabbit is in danger, consider making a new plan with
      *  makePlan()
      *  (At the moment always returns false, this is because we only plan one move with makePlan())
@@ -280,7 +285,8 @@ public class Planner
         return this.inDanger;
     }
     
-    /** Returns the longest path from a collection of Directions
+    /** 
+     * Returns the longest path from a collection of Directions
      * 
      */
     private Direction getLongestFreeDirection(ArrayList<Direction> directions){

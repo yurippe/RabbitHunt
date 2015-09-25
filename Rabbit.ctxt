@@ -1,12 +1,17 @@
 #BlueJ class context
 comment0.params=model\ position
 comment0.target=Rabbit(Model,\ Position)
+comment0.text=\r\n\ In\ order\ to\ create\ a\ new\ Rabbit\ we\ need\ to\ provide\ a\r\n\ model\ og\ and\ position.\ Do\ not\ change\ the\ signature\ or\r\n\ first\ line\ of\ the\ construction.\ Appending\ code\ after\r\n\ the\ first\ line\ is\ allowed.\r\n
 comment1.params=
 comment1.target=Direction\ decideDirection()
 comment1.text=\r\n\ Decides\ in\ which\ direction\ the\ rabbit\ wants\ to\ move.\r\n
 comment2.params=
-comment2.target=Direction\ decideDirectionR()
+comment2.target=Direction\ decideDirection2()
+comment2.text=\ \r\n\ Waits\ for\ the\ fox,\ then\ runs\ in\ circles\r\n\ NOT\ effective\ versus\ more\ than\ one\ fox\r\n\ \r\n
 comment3.params=
-comment3.target=java.lang.String\ getCreator()
-comment3.text=\r\n\ This\ method\ is\ used\ to\ retrieve\ who\ the\ authors\ are.\r\n
-numComments=4
+comment3.target=Direction\ decideDirectionR()
+comment3.text=\ \r\n\ Uses\ the\ planner\ to\ get\ a\ direction\r\n\ \r\n
+comment4.params=
+comment4.target=java.lang.String\ getCreator()
+comment4.text=\r\n\ This\ method\ is\ used\ to\ retrieve\ who\ the\ authors\ are.\r\n
+numComments=5
