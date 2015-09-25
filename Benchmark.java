@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Benchmark
 {
-    public static final int NUMBER_OF_TRIALS = 100000;
+    public static final int NUMBER_OF_TRIALS = 100;
     public static final int NUMBER_OF_COLUMNS = 20;
     public static final int NUMBER_OF_ROWS = 20;
 

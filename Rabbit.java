@@ -20,12 +20,53 @@ public class Rabbit extends Animal {
         planner = new Planner(this);
     }
     
-    /**
-     * Decides in which direction the rabbit wants to move.
-     */
+
+    
+    /** 
+    * Uses the planner to get a direction
+    * 
+    */
     @Override
-    public Direction decideDirection(){
-        return Direction.STAY;
+    public Direction decideDirection() {
+        //If hasPlan && not inDanger:
+        //followPlan()
+        //else:
+        //makePlan()
+        if(planner.hasPlan() && !(planner.isInDanger())){
+            return planner.getDirection();
+        }
+        else{
+            planner.makePlan();
+            return planner.getDirection();
+        }
+    }
+    
+    /**
+     * Escapes 2 foxes
+     * (Oppgave 3)
+     */
+    public Direction decideDirection3(){
+                ArrayList<Direction> foxDirs = findFoxes();
+        if(foxDirs.size() == 0){
+            return Direction.STAY;
+        }else if(foxDirs.size() == 1){
+            return decideDirection1();
+        }else{
+            
+            ArrayList<Direction> escapeRoutesFox1 = escapeRoutesForDirection(foxDirs.get(0));
+            ArrayList<Direction> escapeRoutesFox2 = escapeRoutesForDirection(foxDirs.get(1));
+            
+            ArrayList<Direction> overlap = new ArrayList<Direction>();
+            
+            for(Direction d : escapeRoutesFox1){
+                if(escapeRoutesFox2.contains(d)){
+                    overlap.add(d);
+                }
+            }
+            
+            return getLongestFreeDirection(overlap);
+           
+        }
     }
     
     
@@ -96,24 +137,7 @@ public class Rabbit extends Animal {
         }
         return Direction.STAY;
        }
-    
-    /** 
-    * Uses the planner to get a direction
-    * 
-    */
-    public Direction decideDirectionR() {
-        //If hasPlan && not inDanger:
-        //followPlan()
-        //else:
-        //makePlan()
-        if(planner.hasPlan() && !(planner.isInDanger())){
-            return planner.getDirection();
-        }
-        else{
-            planner.makePlan();
-            return planner.getDirection();
-        }
-    }
+   
     
     /**
      * Gets the direction with most free spaces.
@@ -136,6 +160,42 @@ public class Rabbit extends Animal {
         
         return bestDir;
         
+    }
+    
+    private ArrayList<Direction> findFoxes(){
+        ArrayList<Direction> foxDirs = new ArrayList<Direction>();
+        
+        for(Direction d : Direction.allDirections()){
+        Class<?> type = look(d);
+        if(type == Fox.class){
+            foxDirs.add(d);
+        }
+       }
+       
+       return foxDirs;
+    }
+    
+    private ArrayList<Direction> escapeRoutesForDirection(Direction foxDirection){
+        switch (foxDirection){
+            case N:
+                return new ArrayList<Direction>(Arrays.asList(Direction.E, Direction.W, Direction.SW, Direction.SE));
+            case NE:
+                return new ArrayList<Direction>(Arrays.asList(Direction.S, Direction.W, Direction.NW, Direction.SE));
+            case E:
+                return new ArrayList<Direction>(Arrays.asList(Direction.N, Direction.S, Direction.NW, Direction.SW));
+            case SE:
+                return new ArrayList<Direction>(Arrays.asList(Direction.N, Direction.W, Direction.NE, Direction.SW));
+            case S:
+                return new ArrayList<Direction>(Arrays.asList(Direction.E, Direction.W, Direction.NW, Direction.NE));
+            case SW:
+                return new ArrayList<Direction>(Arrays.asList(Direction.N, Direction.E, Direction.SE, Direction.NW));
+            case W:
+                return new ArrayList<Direction>(Arrays.asList(Direction.N, Direction.S, Direction.NE, Direction.SE));
+            case NW:
+                return new ArrayList<Direction>(Arrays.asList(Direction.NE, Direction.E, Direction.S, Direction.SW));
+            default:
+                return new ArrayList<Direction>(Arrays.asList(Direction.STAY));
+        }
     }
     
     /**
