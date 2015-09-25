@@ -1,14 +1,20 @@
 #BlueJ class context
 comment0.params=rabbit
 comment0.target=Planner(Rabbit)
+comment0.text=\ Constructor\ for\ Planner\r\n\ \r\n
 comment1.params=
 comment1.target=void\ makePlan()
+comment1.text=\ Makes\ a\ plan\ of\ future\ moves\r\n\ \r\n
 comment2.params=
 comment2.target=boolean\ hasPlan()
+comment2.text=\ Returns\ whether\ or\ not\ we\ have\ a\ plan\ we\ can\ follow.\r\n\ \r\n\ \r\n
 comment3.params=
 comment3.target=Direction\ getDirection()
+comment3.text=\ Get's\ the\ next\ direction\ to\ take.\r\n\ \ NOTE\:\ This\ works\ much\ like\ an\ iterator,\ and\ will\ also\ remove\ the\ direction\ from\ the\ plan\ arraylist\r\n\ \ (Consider\ renaming\ to\ getNextDirection())\r\n
 comment4.params=
 comment4.target=boolean\ isInDanger()
+comment4.text=\ Returns\ whether\ the\ rabbit\ is\ in\ danger.\r\n\ \ If\ the\ rabbit\ is\ in\ danger,\ consider\ making\ a\ new\ plan\ with\r\n\ \ makePlan()\r\n\ \ (At\ the\ moment\ always\ returns\ false,\ this\ is\ because\ we\ only\ plan\ one\ move\ with\ makePlan())\r\n
 comment5.params=directions
 comment5.target=Direction\ getLongestFreeDirection(java.util.ArrayList)
+comment5.text=\ Returns\ the\ longest\ path\ from\ a\ collection\ of\ Directions\r\n\ \r\n
 numComments=6

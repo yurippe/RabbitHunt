@@ -22,7 +22,36 @@ public class Rabbit extends Animal {
      * Decides in which direction the rabbit wants to move.
      */
     @Override
-    public Direction decideDirection() {
+    public Direction decideDirection1(){
+    
+        
+        
+    }
+        
+        public Direction decideDirection2(){
+            Class<?> c;
+            
+            for(Direction d : Direction.allDirections()){
+                c = look(d);
+                
+                //Be daring, and wait for the fox to get close
+                if(c == Fox.class && distance(d) == 1){
+                    //turn 135 degrees away from the fox
+                    Direction d1 = Direction.turn(d, 3);
+                    //Check to see if we can move here
+                    if(canMove(d1)){
+                        return d1;
+                    }else{
+                        //turn some more and try again, if not - defeat
+                        return Direction.turn(d1,3);
+                    }
+                   
+            }
+        }
+        return Direction.STAY;
+       }
+    
+    public Direction decideDirectionR() {
         //If hasPlan && not inDanger:
         //followPlan()
         //else:
@@ -35,6 +64,8 @@ public class Rabbit extends Animal {
             return planner.getDirection();
         }
     }
+    
+    
     
     /**
      * This method is used to retrieve who the authors are.
